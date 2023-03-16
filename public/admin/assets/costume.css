@@ -142,3 +142,18 @@
     opacity: 1;
     pointer-events: unset;
 }
+
+
+.m-portlet__foot [data-url]{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.m-portlet__foot.active [data-url]{
+    opacity: 1;
+    pointer-events: unset;
+}
+
+.fc-event-title{
+    color: black;
+}

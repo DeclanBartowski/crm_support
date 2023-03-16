@@ -24,6 +24,22 @@ class AdminMenu extends Component
             $user = Auth::user();
             if ($user->isAdmin()) {
                 $arTabs = [
+                    'applications' =>
+                        [
+                            'name' => 'Заявки',
+                            'icon' => 'flaticon-event-calendar-symbol',
+                            'items' =>
+                                [
+                                    'applications.index' => [
+                                        'name' => 'Список заявок'
+                                    ],
+                                    'applications.create' => [
+                                        'name' => 'Создать заявку'
+                                    ],
+
+
+                                ]
+                        ],
                     'events' =>
                         [
                             'name' => 'Мероприятия',
@@ -39,6 +55,7 @@ class AdminMenu extends Component
 
                                 ]
                         ],
+
                     'customers' =>
                         [
                             'name' => 'Заказчики',
@@ -62,6 +79,9 @@ class AdminMenu extends Component
                                 [
                                     'archive.index' => [
                                         'name' => 'Список мероприятий'
+                                    ],
+                                    'archive_applications' => [
+                                        'name' => 'Архив заявок'
                                     ],
                                 ]
                         ],
@@ -95,6 +115,7 @@ class AdminMenu extends Component
 
                                 ]
                         ],
+
                 ];
             } else {
                 $arTabs = [

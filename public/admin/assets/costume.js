@@ -4,11 +4,42 @@ $.ajaxSetup({
     }
 });
 if (typeof columns != "undefined" && typeof order != 'undefined') {
-    $("#data_list").DataTable({
+   var dataTable = $("#data_list").DataTable({
         responsive: !0,
         searchDelay: 500,
         processing: !0,
         ajax: "?getList=Y",
+        language: {
+            "sProcessing": "Подождите...",
+            "sLengthMenu": "Показать _MENU_ записей",
+            "sZeroRecords": "Записи отсутствуют.",
+            "sInfo": "Записи с _START_ до _END_ из _TOTAL_ записей",
+            "sInfoEmpty": "Записи с 0 до 0 из 0 записей",
+            "sInfoFiltered": "(отфильтровано из _MAX_ записей)",
+            "sInfoPostFix": "",
+            "sSearch": "Поиск:",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "Первая",
+                "sPrevious": '<i class="la la-angle-left"></i>',
+                "sNext": '<i class="la la-angle-right"></i>',
+                "sLast": "Последняя"
+            },
+            "oAria": {
+                "sSortAscending": ": активировать для сортировки столбца по возрастанию",
+                "sSortDescending": ": активировать для сортировки столбцов по убыванию"
+            }
+        },
+        columns: columns,
+    })
+}
+
+if (typeof columns != "undefined" && typeof order != 'undefined') {
+    var dataTableSecond = $("#data_list_2").DataTable({
+        responsive: !0,
+        searchDelay: 500,
+        processing: !0,
+        ajax: "?getList2=Y",
         language: {
             "sProcessing": "Подождите...",
             "sLengthMenu": "Показать _MENU_ записей",
@@ -190,10 +221,59 @@ $(document).on('click', '[data-delete-model]', function () {
 
 $(document).on('change', '.item-checker', function () {
     if ($('.item-checker:checked').length > 0) {
-        $('.m-portlet__foot').addClass('active');
+        $(this).parents('.m-portlet.m-portlet--mobile').find('.m-portlet__foot').addClass('active');
     } else {
-        $('.m-portlet__foot').removeClass('active');
+        $(this).parents('.m-portlet.m-portlet--mobile').find('.m-portlet__foot').removeClass('active');
     }
     return false;
 })
 
+$(document).on('click', '[data-url]', function (){
+
+    let ids = [];
+    $.each($(this).parents('.m-portlet').find('.item-checker:checked'), function (index, value) {
+        ids.push($(this).val())
+    })
+
+    $.ajax({
+        url: $(this).attr('data-url'),
+        type: 'POST',
+        data: {
+            ids: ids,
+        },
+        success: function () {
+            dataTable.ajax.reload();
+            dataTableSecond.ajax.reload();
+        }
+    });
+
+})
+
+
+$('[href="#tab_general2"]').click(function (){
+    setTimeout(() => {
+        $(".m-form select").select2({
+            language: "ru",
+            placeholder: "Выберите значение",
+            allowClear: true
+        });
+    }, 100);
+
+})
+
+$(document).on('submit','[data-add-contact]', function (){
+
+    $.ajax({
+        url: $(this).attr('action'),
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function (data) {
+            $('#customersSet').html(data);
+            $('[href="#tab_general2"]').click();
+            $('[href="#tab_general1"]').remove();
+            $('#tab_general1').remove();
+
+        }
+    });
+    return false;
+})

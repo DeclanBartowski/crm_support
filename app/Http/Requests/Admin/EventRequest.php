@@ -34,11 +34,11 @@ class EventRequest extends FormRequest
             'platform_id' => '',
             'attachment_to_agreement' => '',
             'attachment_to_agreement_old' => '',
-            'is_canceled' => '',
-            'cancel_reason' => ['required_with:is_canceled'],
-            'cancel_reason_official' => ['required_with:is_canceled'],
-            'cancel_stage' => ['required_with:is_canceled'],
-            'cancel_reason_list' => ['required_with:is_canceled'],
+//            'is_canceled' => '',
+//            'cancel_reason' => ['required_with:is_canceled'],
+//            'cancel_reason_official' => ['required_with:is_canceled'],
+//            'cancel_stage' => ['required_with:is_canceled'],
+//            'cancel_reason_list' => ['required_with:is_canceled'],
 
         ];
     }

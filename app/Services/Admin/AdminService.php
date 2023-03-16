@@ -7,6 +7,7 @@ namespace App\Services\Admin;
 use App\Models\User;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AdminService
 {
@@ -29,7 +30,7 @@ class AdminService
         }
     }
 
-    public function getList($arFilter = [], $arOrder = [], $arRelations = [],$customSort = false)
+    public function getList($arFilter = [], $arOrder = [], $arRelations = [], $customSort = false)
     {
         $arLinkFields = array_filter($this->model::$listFields, function ($arItem) {
             return isset($arItem['link']) && $arItem['link'] == 'Y';
@@ -60,7 +61,7 @@ class AdminService
                 $items->where($field, $value);
             }
         }
-        if($customSort){
+        if ($customSort) {
             $items = $items->get()->sortByDesc('date_order');
         }
 
@@ -78,6 +79,12 @@ class AdminService
         if ($arLinkFields) {
             foreach ($arLinkFields as $field) {
                 $result->addColumn($field['data'], function ($item) use ($field) {
+                    if ($field['data'] == 'sport') {
+                        $field['data'] = 'sport_string';
+                    }
+                    if($field['data'] == 'date')  {
+                        $field['data'] = 'sport_time_string';
+                    }
                     return sprintf('<a href="%s">%s</a>', route(sprintf('%s.edit', $this->prefix), $item),
                         $item->{$field['data']});
                 });

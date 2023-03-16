@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Str;
 use function Symfony\Component\String\s;
 
 class Event extends Model
@@ -14,17 +15,17 @@ class Event extends Model
     protected $fillable = [
         'date',
         'sport',
-        'sport_time',
+       // 'sport_time',
         'additional_info',
         'customer_id',
         'platform_id',
         'user_id',
         'attachment_to_agreement',
-        'is_canceled',
-        'cancel_reason',
-        'cancel_reason_official',
-        'cancel_stage',
-        'cancel_reason_list',
+//        'is_canceled',
+//        'cancel_reason',
+//        'cancel_reason_official',
+//        'cancel_stage',
+//        'cancel_reason_list',
         'is_agreement',
         'is_payed',
     ];
@@ -39,11 +40,11 @@ class Event extends Model
                 'label' => 'Спортивная часть',
                 'type' => 'textarea'
             ],
-            'sport_time' => [
-                'label' => 'Время начала спорт. части',
-                'type' => 'date',
-                'input_type' => 'time'
-            ],
+//            'sport_time' => [
+//                'label' => 'Время начала спорт. части',
+//                'type' => 'date',
+//                'input_type' => 'time'
+//            ],
             'additional_info' => [
                 'label' => 'Дополнительная информация по мероприятию',
                 'type' => 'textarea'
@@ -63,75 +64,75 @@ class Event extends Model
                 'label' => 'Приложение к договору',
                 'type' => 'file'
             ],
-            'is_canceled' => [
-                'label' => 'Мероприятие отменилось',
-                'type' => 'boolean'
-            ],
-            'cancel_reason_title' => [
-                'label' => 'Почему мероприятие отменилось',
-                'type' => 'title',
-                'show_if' => 'is_canceled'
-            ],
-            'cancel_reason' => [
-                'label' => 'Своими словами',
-                'type' => 'textarea',
-                'show_if' => 'is_canceled'
-            ],
-            'cancel_reason_official' => [
-                'label' => 'Официальная версия от заказчиков',
-                'type' => 'textarea',
-                'show_if' => 'is_canceled'
-            ],
-            'cancel_stage' => [
-                'label' => 'На каком этапе',
-                'type' => 'list',
-                'values' => [
-                    [
-                        'id' => 'При первичном уточнении деталей',
-                        'name' => 'При первичном уточнении деталей'
-                    ],
-                    [
-                        'id' => 'При согласовании коммерческого предложения',
-                        'name' => 'При согласовании коммерческого предложения'
-                    ],
-                    [
-                        'id' => 'При согласовании договора',
-                        'name' => 'При согласовании договора'
-                    ],
-                    [
-                        'id' => 'Не поступила оплата при подписанном договоре',
-                        'name' => 'Не поступила оплата при подписанном договоре'
-                    ],
-                ],
-                'show_if' => 'is_canceled'
-            ],
-            'cancel_reason_list' => [
-                'label' => 'По какой причине',
-                'type' => 'list',
-                'values' => [
-                    [
-                        'id' => 'Выбрали другого поставщика услуг',
-                        'name' => 'Выбрали другого поставщика услуг'
-                    ],
-                    [
-                        'id' => 'Отменили мероприятие совсем',
-                        'name' => 'Отменили мероприятие совсем'
-                    ],
-                    [
-                        'id' => 'Хотят свои нереальные условия в договоре',
-                        'name' => 'Хотят свои нереальные условия в договоре'
-                    ],
-                    [
-                        'id' => 'Хотят свои нереальные условия по оплате',
-                        'name' => 'Хотят свои нереальные условия по оплате'
-                    ],
-                    [
-                        'id' => 'Другое',
-                        'name' => 'Другое'
-                    ],
-                ],
-                'show_if' => 'is_canceled'
-            ],
+//            'is_canceled' => [
+//                'label' => 'Мероприятие отменилось',
+//                'type' => 'boolean'
+//            ],
+//            'cancel_reason_title' => [
+//                'label' => 'Почему мероприятие отменилось',
+//                'type' => 'title',
+//                'show_if' => 'is_canceled'
+//            ],
+//            'cancel_reason' => [
+//                'label' => 'Своими словами',
+//                'type' => 'textarea',
+//                'show_if' => 'is_canceled'
+//            ],
+//            'cancel_reason_official' => [
+//                'label' => 'Официальная версия от заказчиков',
+//                'type' => 'textarea',
+//                'show_if' => 'is_canceled'
+//            ],
+//            'cancel_stage' => [
+//                'label' => 'На каком этапе',
+//                'type' => 'list',
+//                'values' => [
+//                    [
+//                        'id' => 'При первичном уточнении деталей',
+//                        'name' => 'При первичном уточнении деталей'
+//                    ],
+//                    [
+//                        'id' => 'При согласовании коммерческого предложения',
+//                        'name' => 'При согласовании коммерческого предложения'
+//                    ],
+//                    [
+//                        'id' => 'При согласовании договора',
+//                        'name' => 'При согласовании договора'
+//                    ],
+//                    [
+//                        'id' => 'Не поступила оплата при подписанном договоре',
+//                        'name' => 'Не поступила оплата при подписанном договоре'
+//                    ],
+//                ],
+//                'show_if' => 'is_canceled'
+//            ],
+//            'cancel_reason_list' => [
+//                'label' => 'По какой причине',
+//                'type' => 'list',
+//                'values' => [
+//                    [
+//                        'id' => 'Выбрали другого поставщика услуг',
+//                        'name' => 'Выбрали другого поставщика услуг'
+//                    ],
+//                    [
+//                        'id' => 'Отменили мероприятие совсем',
+//                        'name' => 'Отменили мероприятие совсем'
+//                    ],
+//                    [
+//                        'id' => 'Хотят свои нереальные условия в договоре',
+//                        'name' => 'Хотят свои нереальные условия в договоре'
+//                    ],
+//                    [
+//                        'id' => 'Хотят свои нереальные условия по оплате',
+//                        'name' => 'Хотят свои нереальные условия по оплате'
+//                    ],
+//                    [
+//                        'id' => 'Другое',
+//                        'name' => 'Другое'
+//                    ],
+//                ],
+//                'show_if' => 'is_canceled'
+//            ],
 
         ];
     public static $listFields = [
@@ -156,10 +157,10 @@ class Event extends Model
             'name' => 'Спортивная часть',
             'link' => 'Y'
         ],
-        [
-            'data' => 'sport_time',
-            'name' => 'Время начала спортивной части ',
-        ],
+//        [
+//            'data' => 'sport_time',
+//            'name' => 'Время начала спортивной части ',
+//        ],
         [
             'data' => 'customer_column',
             'name' => 'Название фирмы',
@@ -235,6 +236,25 @@ class Event extends Model
         if($value){
             $value = date('h:i',strtotime($value));
         }
+        return $value;
+    }
+    public function getSportStringAttribute($value){
+
+        $value = $this->sport;
+        if($value) {
+            $value =  Str::limit($value, 40);
+        }
+
+        return $value;
+    }
+
+    public function getSportTimeStringAttribute($value){
+
+        $value = $this->date;
+        if($value) {
+            $value =  date('d.m.Y', strtotime($value));
+        }
+
         return $value;
     }
     public function getDateOrderAttribute(){

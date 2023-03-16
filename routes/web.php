@@ -36,6 +36,18 @@ Route::group(
         return redirect(\route('login'));
     })->name('logout');
 
+    Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'index'])->name('calendar');
+    Route::get('/archive-applications', [\App\Http\Controllers\ApplicationController::class, 'archive'])->name('archive_applications');
+
+    Route::post('/application-active', [\App\Http\Controllers\ApplicationController::class, 'active'])->name('application_active');
+    Route::post('/application-deactive', [\App\Http\Controllers\ApplicationController::class, 'deActive'])->name('application_deactive');
+    Route::post('/application-archive', [\App\Http\Controllers\ApplicationController::class, 'archiveAction'])->name('archive_action');
+    Route::post('/application-remove', [\App\Http\Controllers\ApplicationController::class, 'remove'])->name('archive_remove');
+    Route::post('/application-restore', [\App\Http\Controllers\ApplicationController::class, 'restore'])->name('archive_restore');
+    Route::post('/agent-add', [\App\Http\Controllers\ApplicationController::class, 'agentAdd'])->name('agent_add');
+    Route::post('/events-add', [\App\Http\Controllers\ApplicationController::class, 'eventAdd'])->name('event_add');
+
+
     Route::get('/', function () {
         return redirect(\route('events.index'));
     })->name('home');
@@ -43,6 +55,7 @@ Route::group(
     Route::post('delete-items', [\App\Http\Controllers\GeneralController::class, 'deleteElements'])->name('delete-items');
     Route::resources([
         'events' => App\Http\Controllers\EventController::class,
+        'applications' => App\Http\Controllers\ApplicationController::class,
         'customers' => App\Http\Controllers\CustomerController::class,
         'platforms' => App\Http\Controllers\PlatformController::class,
 
