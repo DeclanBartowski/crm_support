@@ -24,7 +24,7 @@
                                 Клиент
                             </label>
                             <div class="col-10">
-                                <input class="form-control m-input" name="name_firm" type="text" value=""  required>
+                                <input class="form-control m-input" name="name_firm" type="text" value=""  >
                             </div>
                         </div>
 
@@ -33,7 +33,7 @@
                                 Комментарий
                             </label>
                             <div class="col-10">
-                                <textarea rows="10" class="form-control m-input" name="comment" type="text" id="comment" required
+                                <textarea rows="10" class="form-control m-input" name="comment" type="text" id="comment"
                                           maxlength="200"></textarea>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                                 Текст заявки
                             </label>
                             <div class="col-10">
-                                <textarea rows="10" class="form-control m-input" name="text_application" type="text" required
+                                <textarea rows="10" class="form-control m-input" name="text_application" type="text"
                                           id="text_application" maxlength="200"></textarea>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                     Дата
                                 </label>
                                 <div class="col-10">
-                                    <input class="form-control m-input" name="date" type="date" value="" id="date" required
+                                    <input class="form-control m-input" name="date" type="date" value="" id="date"
                                            max="9999-12-31T23:59">
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                     Предполагаемая дата
                                 </label>
                                 <div class="col-10">
-                                    <input class="form-control m-input" name="chance_date" type="text"  required
+                                    <input class="form-control m-input" name="chance_date" type="text"
                                            value="" >
                                 </div>
 
@@ -76,7 +76,7 @@
                                 Тип клиента
                             </label>
                             <div class="col-10">
-                                <select class="form-control m-select2" id="type_client" name="type_client" required>
+                                <select class="form-control m-select2" id="type_client" name="type_client" >
                                     <option></option>
                                     @foreach($typeClients as $client)
                                         <option value="{{$client}}">{{$client}}</option>
@@ -90,7 +90,7 @@
                                 Статус заявки
                             </label>
                             <div class="col-10">
-                                <select class="form-control m-select2" id="status" name="status" required>
+                                <select class="form-control m-select2" id="status" name="status" >
                                     <option></option>
                                     @foreach($statuses as $status)
                                         <option value="{{$status}}">{{$status}}</option>
@@ -104,7 +104,7 @@
                                 Вероятность
                             </label>
                             <div class="col-10">
-                                <select class="form-control m-select2" id="probability" name="probability" required>
+                                <select class="form-control m-select2" id="probability" name="probability" >
                                     <option></option>
                                     @foreach($probabilities as $propability)
                                         <option value="{{$propability}}">{{$propability}}</option>
@@ -118,7 +118,7 @@
                                 От кого
                             </label>
                             <div class="col-10">
-                                <select class="form-control m-select2" id="from" name="from" required>
+                                <select class="form-control m-select2" id="from" name="from" >
                                     <option></option>
                                     @foreach($froms as $form)
                                         <option value="{{$form}}">{{$form}}</option>
@@ -132,7 +132,7 @@
                                 Актуальна
                             </label>
                             <div class="col-10">
-                                <select class="form-control m-select2" id="active" name="active" required>
+                                <select class="form-control m-select2" id="active" name="active" >
                                     <option></option>
                                     @foreach($yesNo as $key => $choice)
                                         <option value="{{$key}}">{{$choice}}</option>
@@ -147,7 +147,7 @@
                                     Архив
                                 </label>
                                 <div class="col-10">
-                                    <select class="form-control m-select2" id="archive" name="archive" required>
+                                    <select class="form-control m-select2" id="archive" name="archive" >
                                         <option></option>
                                         @foreach($yesNo as $key => $choice)
                                             <option value="{{$key}}">{{$choice}}</option>
@@ -160,7 +160,7 @@
                                     Менеджер
                                 </label>
                                 <div class="col-10">
-                                    <select class="form-control m-select2" id="user_id" name="user_id" required>
+                                    <select class="form-control m-select2" id="user_id" name="user_id" >
                                         <option></option>
                                         @foreach($users as $user)
                                             <option value="{{$user->id}}">{{$user->name}}</option>

@@ -25,17 +25,18 @@ class CalendarController extends Controller
             'name' => 'название компании',
         ],
         [
-            'data' => 'type_client',
+            'data' => 'probability',
             'name' => 'вероятность',
+        ],
+        [
+            'data' => 'sport_name',
+            'name' => 'спортивная часть',
         ],
         [
             'data' => 'manager',
             'name' => 'менеджер',
         ],
-//        [
-//            'data' => 'status',
-//            'name' => 'спортивная часть',
-//        ],
+
 
     ];
 
@@ -43,7 +44,7 @@ class CalendarController extends Controller
     {
 
         $result = datatables()->of($fullApplication)->editColumn('date', function ($v) {
-            return sprintf('<a href="%s">%s</a>', $v['url'], date('d.m.Y', strtotime($v['date'])));
+            return sprintf('<a href="%s">%s</a>', $v['url'], (empty($v['date'])) ? '' : date('d.m.Y', strtotime($v['date'])));
         });
 
         return $result->rawColumns(['date'])->toJson();
@@ -67,8 +68,9 @@ class CalendarController extends Controller
                     'url' => route('applications.edit', ['application' => $application->id]),
                     'date' => $application->date,
                     'name_firm' => $application->name_firm,
-                    'type_client' => $application->type_client,
+                    'probability' => $application->probability,
                     'status' => $application->status,
+                    'sport_name' => '',
                     'manager' => (!empty($application->user_id))? $application->user->name : '',
                 ];
             }
@@ -79,8 +81,8 @@ class CalendarController extends Controller
                     'url' => route('events.edit', ['event' => $event->id]),
                     'date' => $event->date,
                     'name_firm' => (!empty($event->customer))? $event->customer->name : '',
-                    'type_client' => '',
-                    'status' => $event->sport,
+                    'probability' => '',
+                    'sport_name' => $event->sport,
                     'manager' => (!empty($event->user_id))? $event->user->name : '',
                 ];
             }
@@ -101,7 +103,7 @@ class CalendarController extends Controller
 
         foreach ($eventsModel as $event) {
             $events[] = [
-                'title' => Str::of($event->sport)->toString(),
+                'title' => (!empty($event->customer))? $event->customer->name : '',
                 'start' => date('Y-m-d', strtotime($event->date)),
                 'color' => ($event->is_payed) ? '#23c70a' : '#e48a30',
             ];

@@ -68,7 +68,7 @@ class ApplicationController extends Controller
         $result = datatables()->of($fullApplication)->addColumn('check', function ($item) {
             return sprintf('<div class="center_column"><input type="checkbox" class="item-checker" name="items[]" value="%s" /></div>',$item->id);
         })->editColumn('date', function ($v){
-            return date('d.m.Y', strtotime($v->date));
+            return (empty($v->date)) ? '' : date('d.m.Y', strtotime($v->date));
         })->editColumn('id', function ($v){
             return sprintf('<a href="/applications/%s/edit">%s</a>',  $v->id, $v->id);
         })->editColumn('user_id', function ($v){
@@ -179,6 +179,9 @@ class ApplicationController extends Controller
 
         $app = new Application();
         $app->fill($request->validated());
+
+        if(is_null($request->get('active'))) $app->active =  true;
+        if(is_null($request->get('archive'))) $app->archive =  false;
         $app->save();
         return redirect()->route('applications.index')->with('status', 'Заявка добавлена');
 
@@ -291,6 +294,7 @@ class ApplicationController extends Controller
 
         $eventModel = new Event();
         $eventModel->fill($arr);
+        $eventModel->user_id =Auth::user()->id;
         $eventModel->save();
 
         if($eventModel->id >  0)
